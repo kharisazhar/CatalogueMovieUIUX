@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Catalogue Movie UI UX</string>
+    <string name="movie_title">Judul Film</string>
+    <string name="now_playing">Sedang Tayang</string>
+    <string name="popular">Populer</string>
+    <string name="language">id</string>
+    <string name="up_coming">Segera Tayang</string>
+    <string name="whoops">Whoops Gagal Memuat Film</string>
+    <string name="search">cari</string>
+    <string name="change_language">Ganti Bahasa</string>
+    <string name="_search_movie">cari film</string>
+    <string name="search_">Cari</string>
+    <string name="favorite">Favorite</string>
+
+</resources>
