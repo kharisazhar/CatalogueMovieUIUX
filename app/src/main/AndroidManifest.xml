@@ -24,7 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailMovieActivity" />
+        <activity android:name=".DetailMovieActivity"
+            android:parentActivityName=".MainActivity"/>
         <activity android:name=".SearchResultActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />

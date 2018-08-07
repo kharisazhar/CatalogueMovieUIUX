@@ -20,8 +20,8 @@ import com.dicoding.kharisazhar.cataloguemovieuiux.model.Result;
 
 import static android.provider.BaseColumns._ID;
 import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.CONTENT_URI;
-import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.DATE;
 import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.DESCRIPTION;
+import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.POSTER_PATH;
 import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.TITLE;
 
 public class DetailMovieActivity extends AppCompatActivity {
@@ -50,6 +50,7 @@ public class DetailMovieActivity extends AppCompatActivity {
         tvReleaseDate = findViewById(R.id.tv_release_date);
         imgFab = findViewById(R.id.fab);
 
+        loadData();
         CollapsingToolbarLayout collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
         collapsingToolbarLayout.setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -57,7 +58,6 @@ public class DetailMovieActivity extends AppCompatActivity {
                 ContextCompat.getColor(this, R.color.white));
         collapsingToolbarLayout.setExpandedTitleColor(
                 ContextCompat.getColor(this, R.color.colorPrimary));
-        loadData();
 
         imgFab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +82,7 @@ public class DetailMovieActivity extends AppCompatActivity {
             if (item != null){
                 Glide.with(this).load(baseUrlImg + item.getPosterPath()).into(imgBackdrop);
                 tvOverView.setText(item.getOverview());
+                title = item.getTitle();
                 tvReleaseDate.setText(item.getReleaseDate());
             }
         }
@@ -117,7 +118,7 @@ public class DetailMovieActivity extends AppCompatActivity {
         cv.put(_ID,item.getId());
         cv.put(TITLE,item.getTitle());
         cv.put(DESCRIPTION, item.getOverview());
-        cv.put(DATE, item.getReleaseDate());
+        cv.put(POSTER_PATH, item.getPosterPath());
 
 //        getContentResolver().insert(CONTENT_URI, cv);
         getContentResolver().insert(CONTENT_URI, cv);

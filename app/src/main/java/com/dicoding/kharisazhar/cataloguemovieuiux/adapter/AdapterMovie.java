@@ -56,6 +56,7 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.MyViewHolder
         final Result data = getDataMovie().get(position);
 
         holder.tvTitle.setText(data.getTitle());
+        holder.tvOverview.setText(data.getOverview());
         Glide.with(c).load("https://image.tmdb.org/t/p/w500/"+data
                 .getPosterPath()).into(holder.imgMovie);
 
@@ -77,7 +78,7 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.MyViewHolder
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-        TextView tvTitle;
+        TextView tvTitle, tvOverview;
         ImageView imgMovie;
         CardView cvMovie;
         Button btnDetail;
@@ -87,6 +88,7 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.MyViewHolder
             tvTitle = itemView.findViewById(R.id.tv_movie_title);
             imgMovie = itemView.findViewById(R.id.iv_movie);
             cvMovie = itemView.findViewById(R.id.cv_movie);
+            tvOverview = itemView.findViewById(R.id.tv_overview);
             btnDetail = itemView.findViewById(R.id.btn_detail);
         }
     }

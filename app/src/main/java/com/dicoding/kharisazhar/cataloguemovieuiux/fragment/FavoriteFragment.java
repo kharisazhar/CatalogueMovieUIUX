@@ -93,9 +93,9 @@ public class FavoriteFragment extends Fragment {
             list = cursor;
             adapterFavorite.setListMovie(list);
             adapterFavorite.notifyDataSetChanged();
-            if (list.getCount() == 0){
-                Toast.makeText(c, "Tidak ada data saat ini", Toast.LENGTH_SHORT).show();
-            }
+//            if (list.getCount() == 0){
+//                Toast.makeText(c, "Tidak ada data saat ini", Toast.LENGTH_SHORT).show();
+//            }
         }
     }
 }

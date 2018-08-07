@@ -5,7 +5,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import static android.provider.BaseColumns._ID;
-import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.DATE;
 import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.DESCRIPTION;
 import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.POSTER_PATH;
 import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.TITLE;
@@ -13,7 +12,7 @@ import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContr
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static int DATABASE_VERSION = 3;
+    public static int DATABASE_VERSION = 14;
 
     public static String DATABASE_NAME = "movie_db";
 
@@ -21,12 +20,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + " (%s INTEGER PRIMARY KEY AUTOINCREMENT," +
             " %s TEXT NOT NULL," +
             " %s TEXT NOT NULL," +
-            " %s TEXT NOT NULL)",
+            " %s TEXT NOT NULL)" ,
             TABLE_MOVIE,
             _ID,
             TITLE,
             DESCRIPTION,
-            DATE,
             POSTER_PATH
     );
 

@@ -14,8 +14,8 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import static android.provider.BaseColumns._ID;
-import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.DATE;
 import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.DESCRIPTION;
+import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.POSTER_PATH;
 import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.TITLE;
 import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.getColumnInt;
 import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.getColumnString;
@@ -85,7 +85,7 @@ public class Result implements Parcelable
         this.id = getColumnInt(cursor, _ID);
         this.title = getColumnString(cursor, TITLE);
         this.overview = getColumnString(cursor, DESCRIPTION);
-        this.releaseDate = getColumnString(cursor, DATE);
+        this.posterPath = getColumnString(cursor, POSTER_PATH);
     }
 
 

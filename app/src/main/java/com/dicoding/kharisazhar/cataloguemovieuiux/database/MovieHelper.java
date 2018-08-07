@@ -11,7 +11,6 @@ import com.dicoding.kharisazhar.cataloguemovieuiux.model.Result;
 import java.util.ArrayList;
 
 import static android.provider.BaseColumns._ID;
-import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.DATE;
 import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.DESCRIPTION;
 import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.POSTER_PATH;
 import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.TITLE;
@@ -57,7 +56,6 @@ public class MovieHelper {
                 result.setId(cursor.getInt(cursor.getColumnIndexOrThrow(_ID)));
                 result.setTitle(cursor.getString(cursor.getColumnIndex(TITLE)));
                 result.setOverview(cursor.getString(cursor.getColumnIndexOrThrow(DESCRIPTION)));
-                result.setReleaseDate(cursor.getString(cursor.getColumnIndexOrThrow(DATE)));
                 result.setPosterPath(cursor.getString(cursor.getColumnIndexOrThrow(POSTER_PATH)));
 
                 arrayList.add(result);
@@ -72,7 +70,6 @@ public class MovieHelper {
         ContentValues initialValues = new ContentValues();
         initialValues.put(TITLE, result.getTitle());
         initialValues.put(DESCRIPTION, result.getOverview());
-        initialValues.put(DATE, result.getReleaseDate());
         initialValues.put(POSTER_PATH, result.getPosterPath());
 
         return database.insert(DATABASE_TABLE, null, initialValues);
@@ -82,7 +79,6 @@ public class MovieHelper {
         ContentValues args = new ContentValues();
         args.put(TITLE, result.getTitle());
         args.put(DESCRIPTION, result.getOverview());
-        args.put(DATE, result.getReleaseDate());
         args.put(POSTER_PATH, result.getPosterPath());
 
         return database.update(DATABASE_TABLE, args,_ID + "= '" + result.getId() + "'", null);
