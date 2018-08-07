@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Favorite Movie</string>
+    <string name="detail">Detail</string>
+    <string name="movie_title">Movie Title</string>
+    <string name="lorem_ipsum_sit_dolor_amet">lorem ipsum sit dolor amet</string>
+    <string name="date">date</string>
+</resources>

@@ -4,10 +4,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <permission
-        android:name="com.dicoding.kharisazhar.READ_DATABASE"
+        android:name="com.dicoding.kharisazhar.cataloguemovieuiux.READ_DATABASE"
         android:protectionLevel="normal" />
     <permission
-        android:name="com.dicoding.kharisazhar.WRITE_DATABASE"
+        android:name="com.dicoding.kharisazhar.cataloguemovieuiux.WRITE_DATABASE"
         android:protectionLevel="normal" />
 
     <application

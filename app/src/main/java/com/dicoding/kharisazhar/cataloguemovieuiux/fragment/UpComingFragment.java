@@ -3,6 +3,7 @@ package com.dicoding.kharisazhar.cataloguemovieuiux.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,7 +30,6 @@ public class UpComingFragment extends Fragment {
     RecyclerView rvMovie;
     ProgressBar progressBar;
     String api_key = "da2c66905b58cbb6b972e167cd56310f";
-
     String whoops;
 
     @Override
@@ -41,8 +41,8 @@ public class UpComingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_up_coming, container, false);
-        rvMovie = view.findViewById(R.id.recycler_movie_now_upcoming);
+        View view = inflater.inflate(R.layout.fragment_now_playing, container, false);
+        rvMovie = view.findViewById(R.id.recycler_movie_now_playing);
         progressBar = view.findViewById(R.id.progress_bar);
         whoops = String.format(getResources().getString(R.string.whoops));
         getData();
@@ -51,7 +51,6 @@ public class UpComingFragment extends Fragment {
     private void getData(){
         ApiServices api = RetroConfig.getApiServices();
         final Call<ModelListMovie> call = api.getUpComing(api_key,"en-US");
-
         call.enqueue(new Callback<ModelListMovie>() {
             @Override
             public void onResponse(Call<ModelListMovie> call, Response<ModelListMovie> response) {
@@ -60,7 +59,7 @@ public class UpComingFragment extends Fragment {
 
                 AdapterMovie adapterMovie = new AdapterMovie(getContext(),mData);
                 rvMovie.setAdapter(adapterMovie);
-                rvMovie.setLayoutManager(new GridLayoutManager(getContext(),2));
+                rvMovie.setLayoutManager(new LinearLayoutManager(getContext()));
             }
 
             @Override

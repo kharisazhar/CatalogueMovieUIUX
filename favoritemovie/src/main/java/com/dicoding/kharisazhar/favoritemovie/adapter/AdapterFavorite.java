@@ -1,27 +1,24 @@
-package com.dicoding.kharisazhar.cataloguemovieuiux.adapter;
+package com.dicoding.kharisazhar.favoritemovie.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.dicoding.kharisazhar.cataloguemovieuiux.DetailMovieActivity;
-import com.dicoding.kharisazhar.cataloguemovieuiux.R;
-import com.dicoding.kharisazhar.cataloguemovieuiux.model.Result;
+import com.dicoding.kharisazhar.favoritemovie.DetailMovieActivity;
+import com.dicoding.kharisazhar.favoritemovie.R;
+import com.dicoding.kharisazhar.favoritemovie.model.Result;
 
-public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.MyViewHolder> {
+public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.MyViewHolder>{
 
     private Cursor list;
     private Context context;
@@ -43,7 +40,7 @@ public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.MyView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final Result result = getItem(position);
         holder.tvTitle.setText(result.getTitle());
         holder.tvOverview.setText(result.getOverview());
@@ -52,10 +49,10 @@ public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.MyView
         holder.btnDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(holder.itemView.getContext(), DetailMovieActivity.class);
+                Intent intent = new Intent(context, DetailMovieActivity.class);
 //                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra(PARCEL_OBJECT, result);
-                holder.itemView.getContext().startActivity(intent);
+                context.startActivity(intent);
             }
         });
     }

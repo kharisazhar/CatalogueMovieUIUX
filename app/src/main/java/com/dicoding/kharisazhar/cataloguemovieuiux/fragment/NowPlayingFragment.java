@@ -33,7 +33,6 @@ public class NowPlayingFragment extends Fragment {
     ProgressBar progressBar;
     String api_key = "da2c66905b58cbb6b972e167cd56310f";
     String whoops;
-    private String PARCEL_OBJECT = "parcel_object";
 
     public NowPlayingFragment() {
         // Required empty public constructor
