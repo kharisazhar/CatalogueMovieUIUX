@@ -11,6 +11,7 @@ public class DatabaseContract {
         public static String TITLE = "title";
         public static String DESCRIPTION = "description";
         public static String DATE = "date";
+        public static String POSTER_PATH = "poster_path";
     }
 
     public static final String AUTHORITY = "com.dicoding.kharisazhar.cataloguemovieuiux";

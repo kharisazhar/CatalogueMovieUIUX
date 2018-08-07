@@ -1,5 +1,6 @@
 package com.dicoding.kharisazhar.cataloguemovieuiux.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -17,76 +18,53 @@ import com.dicoding.kharisazhar.cataloguemovieuiux.DetailMovieActivity;
 import com.dicoding.kharisazhar.cataloguemovieuiux.R;
 import com.dicoding.kharisazhar.cataloguemovieuiux.model.Result;
 
-public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.MyViewHoler> {
+public class AdapterFavorite extends RecyclerView.Adapter<AdapterFavorite.MyViewHolder> {
 
     private Cursor list;
+    private Activity activity;
     private Context context;
 
     public AdapterFavorite(Context context) {
         this.context = context;
     }
 
-    private Result getItem(int position){
-        if (!list.moveToPosition(position)) {
-            throw new IllegalStateException("Position INvalid");
-        }
-        return new Result(list);
-    }
-
-    public void setFilm(Cursor items){
-        list = items;
-        if (list !=null){
-            notifyDataSetChanged();
-        }
+    public void setListMovie(Cursor listMovie) {
+        this.list = listMovie;
     }
 
     @NonNull
     @Override
-    public MyViewHoler onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.rv_movie, parent, false);
-        return new MyViewHoler(view);
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_movie, parent, false);
+        return new MyViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHoler holder, int position) {
-
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final Result result = getItem(position);
-
         holder.tvTitle.setText(result.getTitle());
-
-        Glide.with(context).load("https://image.tmdb.org/t/p/w500/"+result.getPosterPath()).into(holder.imgMovie);
-
-        holder.cvMovie.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, DetailMovieActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("EXTRA_TITLE",result.getTitle());
-                intent.putExtra("EXTRA_OVERVIEW",result.getOverview());
-                intent.putExtra("EXTRA_DATE",result.getReleaseDate());
-//                intent.putExtra("EXTRA_POSTER",dataMovie.get(position).getPosterPath());//cooming soon
-                intent.putExtra("EXTRA_BACKDROP", result.getBackdropPath());
-                context.startActivity(intent);
-            }
-        });
+        Glide.with(holder.itemView.getContext()).load(result.getPosterPath()).into(holder.imgMovie);
     }
 
     @Override
     public int getItemCount() {
-        if (list == null){
-            return 0;
-        } else {
-            return list.getCount();
-        }
+        if (list == null) return 0;
+        return list.getCount();
     }
 
-    public class MyViewHoler extends RecyclerView.ViewHolder {
+    private Result getItem(int position){
+        if (!list.moveToPosition(position)) {
+            throw new IllegalStateException("Position invalid");
+        }
+        return new Result(list);
+    }
 
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitle;
         ImageView imgMovie;
         CardView cvMovie;
 
-        public MyViewHoler(View itemView) {
+        public MyViewHolder(View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tv_movie_title);
             imgMovie = itemView.findViewById(R.id.iv_movie);

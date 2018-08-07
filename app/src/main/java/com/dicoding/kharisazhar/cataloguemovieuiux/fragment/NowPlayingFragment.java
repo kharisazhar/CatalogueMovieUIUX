@@ -5,6 +5,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,8 +32,8 @@ public class NowPlayingFragment extends Fragment {
     RecyclerView rvMovie;
     ProgressBar progressBar;
     String api_key = "da2c66905b58cbb6b972e167cd56310f";
-
     String whoops;
+    private String PARCEL_OBJECT = "parcel_object";
 
     public NowPlayingFragment() {
         // Required empty public constructor
@@ -62,7 +63,7 @@ public class NowPlayingFragment extends Fragment {
 
                 AdapterMovie adapterMovie = new AdapterMovie(getContext(),mData);
                 rvMovie.setAdapter(adapterMovie);
-                rvMovie.setLayoutManager(new GridLayoutManager(getContext(),2));
+                rvMovie.setLayoutManager(new LinearLayoutManager(getContext()));
             }
 
             @Override

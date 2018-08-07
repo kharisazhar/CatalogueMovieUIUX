@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,9 +27,18 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.MyViewHolder
 
     private Context c;
     private ArrayList<Result> dataMovie;
+    private String PARCEL_OBJECT = "parcel_object";
 
     public AdapterMovie(Context c, ArrayList<Result> dataMovie) {
         this.c = c;
+        this.dataMovie = dataMovie;
+    }
+
+    public ArrayList<Result> getDataMovie() {
+        return dataMovie;
+    }
+
+    public void setDataMovie(ArrayList<Result> dataMovie) {
         this.dataMovie = dataMovie;
     }
 
@@ -42,22 +52,19 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull final MyViewHolder holder, final int position) {
-//        holder.tvTitle.setText(dataMovie.get(position).getTitle());
-        holder.tvTitle.setText(dataMovie.get(position).getTitle());
-        Glide.with(c).load("https://image.tmdb.org/t/p/w500/"+dataMovie.get(position)
+
+        final Result data = getDataMovie().get(position);
+
+        holder.tvTitle.setText(data.getTitle());
+        Glide.with(c).load("https://image.tmdb.org/t/p/w500/"+data
                 .getPosterPath()).into(holder.imgMovie);
 
-        holder.cvMovie.setOnClickListener(new View.OnClickListener() {
+        holder.btnDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(c, DetailMovieActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                intent.putExtra("EXTRA_TITLE",dataMovie.get(position).getTitle());
-//                intent.putExtra("EXTRA_OVERVIEW",dataMovie.get(position).getOverview());
-//                intent.putExtra("EXTRA_DATE",dataMovie.get(position).getReleaseDate());
-//                intent.putExtra("EXTRA_POSTER",dataMovie.get(position).getPosterPath());//cooming soon
-//                intent.putExtra("EXTRA_BACKDROP", dataMovie.get(position).getBackdropPath());
-                intent.putExtra(DetailMovieActivity.MOVIE_ITEM, new Gson().toJson(holder));
+                intent.putExtra(PARCEL_OBJECT, data);
                 c.startActivity(intent);
             }
         });
@@ -73,12 +80,14 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.MyViewHolder
         TextView tvTitle;
         ImageView imgMovie;
         CardView cvMovie;
+        Button btnDetail;
 
         public MyViewHolder(View itemView){
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tv_movie_title);
             imgMovie = itemView.findViewById(R.id.iv_movie);
             cvMovie = itemView.findViewById(R.id.cv_movie);
+            btnDetail = itemView.findViewById(R.id.btn_detail);
         }
     }
 

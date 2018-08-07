@@ -4,11 +4,16 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import static android.provider.BaseColumns._ID;
+import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.DATE;
+import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.DESCRIPTION;
+import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.POSTER_PATH;
+import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.TITLE;
 import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.TABLE_MOVIE;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    public static int DATABASE_VERSION = 1;
+    public static int DATABASE_VERSION = 3;
 
     public static String DATABASE_NAME = "movie_db";
 
@@ -18,10 +23,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             " %s TEXT NOT NULL," +
             " %s TEXT NOT NULL)",
             TABLE_MOVIE,
-            DatabaseContract.MovieColumns._ID,
-            DatabaseContract.MovieColumns.TITLE,
-            DatabaseContract.MovieColumns.DESCRIPTION,
-            DatabaseContract.MovieColumns.DATE
+            _ID,
+            TITLE,
+            DESCRIPTION,
+            DATE,
+            POSTER_PATH
     );
 
     public DatabaseHelper(Context context) {

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import static android.provider.BaseColumns._ID;
 import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.DATE;
 import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.DESCRIPTION;
+import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.POSTER_PATH;
 import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.MovieColumns.TITLE;
 import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.TABLE_MOVIE;
 
@@ -57,6 +58,7 @@ public class MovieHelper {
                 result.setTitle(cursor.getString(cursor.getColumnIndex(TITLE)));
                 result.setOverview(cursor.getString(cursor.getColumnIndexOrThrow(DESCRIPTION)));
                 result.setReleaseDate(cursor.getString(cursor.getColumnIndexOrThrow(DATE)));
+                result.setPosterPath(cursor.getString(cursor.getColumnIndexOrThrow(POSTER_PATH)));
 
                 arrayList.add(result);
                 cursor.moveToNext();
@@ -71,6 +73,7 @@ public class MovieHelper {
         initialValues.put(TITLE, result.getTitle());
         initialValues.put(DESCRIPTION, result.getOverview());
         initialValues.put(DATE, result.getReleaseDate());
+        initialValues.put(POSTER_PATH, result.getPosterPath());
 
         return database.insert(DATABASE_TABLE, null, initialValues);
     }
@@ -80,6 +83,7 @@ public class MovieHelper {
         args.put(TITLE, result.getTitle());
         args.put(DESCRIPTION, result.getOverview());
         args.put(DATE, result.getReleaseDate());
+        args.put(POSTER_PATH, result.getPosterPath());
 
         return database.update(DATABASE_TABLE, args,_ID + "= '" + result.getId() + "'", null);
     }
