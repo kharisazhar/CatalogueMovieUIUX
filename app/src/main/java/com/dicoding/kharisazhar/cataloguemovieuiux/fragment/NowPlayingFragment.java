@@ -1,12 +1,15 @@
 package com.dicoding.kharisazhar.cataloguemovieuiux.fragment;
 
 import android.os.Bundle;
+import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +36,7 @@ public class NowPlayingFragment extends Fragment {
     ProgressBar progressBar;
     String api_key = "da2c66905b58cbb6b972e167cd56310f";
     String whoops;
+    private static String KEY_VALUE = "state_array";
 
     public NowPlayingFragment() {
         // Required empty public constructor
@@ -47,8 +51,18 @@ public class NowPlayingFragment extends Fragment {
         rvMovie = view.findViewById(R.id.recycler_movie_now_playing);
         progressBar = view.findViewById(R.id.progress_bar);
         whoops = String.format(getResources().getString(R.string.whoops));
+
+        if (savedInstanceState !=null){
+            mData = savedInstanceState.getParcelableArrayList(KEY_VALUE);
+        }
         getData();
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putParcelableArrayList(KEY_VALUE,mData);
+        super.onSaveInstanceState(outState);
     }
 
     private void getData(){

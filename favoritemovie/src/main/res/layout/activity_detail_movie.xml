@@ -35,14 +35,14 @@
                 app:titleTextColor="@android:color/white"
                 app:layout_scrollFlags="scroll|enterAlways" >
             </android.support.v7.widget.Toolbar>
-            <android.support.design.widget.FloatingActionButton
-                android:id="@+id/fab"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:src="@drawable/ic_favorite"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="8dp"/>
+            <!--<android.support.design.widget.FloatingActionButton-->
+                <!--android:id="@+id/fab"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="end|bottom"-->
+                <!--android:src="@drawable/ic_favorite"-->
+                <!--android:layout_marginRight="16dp"-->
+                <!--android:layout_marginBottom="8dp"/>-->
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
