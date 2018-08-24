@@ -5,7 +5,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetroConfig {
 
-
     private static Retrofit getRetrofit(){
         Retrofit r = new Retrofit.Builder()
                 .baseUrl("https://api.themoviedb.org/3/")

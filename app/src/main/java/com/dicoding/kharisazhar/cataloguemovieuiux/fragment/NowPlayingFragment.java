@@ -1,8 +1,11 @@
 package com.dicoding.kharisazhar.cataloguemovieuiux.fragment;
 
+import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.ContentLoadingProgressBar;
@@ -29,6 +32,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.dicoding.kharisazhar.cataloguemovieuiux.database.DatabaseContract.CONTENT_URI;
+
 public class NowPlayingFragment extends Fragment {
 
     ArrayList<Result> mData = new ArrayList<>();
@@ -36,12 +41,26 @@ public class NowPlayingFragment extends Fragment {
     ProgressBar progressBar;
     String api_key = "da2c66905b58cbb6b972e167cd56310f";
     String whoops;
-    private static String KEY_VALUE = "state_array";
 
     public NowPlayingFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null){
+            mData = savedInstanceState.getParcelableArrayList("KEY_VALUE");
+        } else {
+            getData();
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList("KEY_VALUE", mData);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,17 +71,8 @@ public class NowPlayingFragment extends Fragment {
         progressBar = view.findViewById(R.id.progress_bar);
         whoops = String.format(getResources().getString(R.string.whoops));
 
-        if (savedInstanceState !=null){
-            mData = savedInstanceState.getParcelableArrayList(KEY_VALUE);
-        }
-        getData();
+        setRetainInstance(true);
         return view;
-    }
-
-    @Override
-    public void onSaveInstanceState(@NonNull Bundle outState) {
-        outState.putParcelableArrayList(KEY_VALUE,mData);
-        super.onSaveInstanceState(outState);
     }
 
     private void getData(){

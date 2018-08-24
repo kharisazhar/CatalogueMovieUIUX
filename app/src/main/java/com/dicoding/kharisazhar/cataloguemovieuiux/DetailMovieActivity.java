@@ -35,7 +35,7 @@ public class DetailMovieActivity extends AppCompatActivity {
     private boolean isFavorite = false;
     private MovieHelper movieHelper;
 
-    private String PARCEL_OBJECT = "parcel_object";
+    public static final String PARCEL_OBJECT = "parcel_object";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

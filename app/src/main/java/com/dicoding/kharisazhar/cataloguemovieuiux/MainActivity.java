@@ -1,9 +1,12 @@
 package com.dicoding.kharisazhar.cataloguemovieuiux;
 
+import android.app.FragmentTransaction;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,20 +21,26 @@ import android.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.dicoding.kharisazhar.cataloguemovieuiux.adapter.AdapterMovie;
 import com.dicoding.kharisazhar.cataloguemovieuiux.fragment.FavoriteFragment;
 import com.dicoding.kharisazhar.cataloguemovieuiux.fragment.NowPlayingFragment;
 import com.dicoding.kharisazhar.cataloguemovieuiux.fragment.PopularFragment;
 import com.dicoding.kharisazhar.cataloguemovieuiux.fragment.UpComingFragment;
-import com.miguelcatalan.materialsearchview.MaterialSearchView;
+import com.dicoding.kharisazhar.cataloguemovieuiux.model.Result;
+import com.dicoding.kharisazhar.cataloguemovieuiux.settings.SettingsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+//    private Fragment nowFragment = NowPlayingFragment;
+    NowPlayingFragment nowPlayingFragment;
+    Fragment nowFragment = new NowPlayingFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
 
-        if (getSupportActionBar() != null){
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         }
 
@@ -52,6 +61,15 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
+        if (savedInstanceState != null){
+            nowFragment = getSupportFragmentManager().getFragment(savedInstanceState, "KEY_VALUE");
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        getSupportFragmentManager().putFragment(outState, "KEY_VALUE", nowFragment);
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -132,8 +150,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.change_language){
-            Intent intent = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+        if(item.getItemId() == R.id.action_settings){
+            Intent intent = new Intent(this,SettingsActivity.class);
             startActivity(intent);
         }
         return super.onOptionsItemSelected(item);

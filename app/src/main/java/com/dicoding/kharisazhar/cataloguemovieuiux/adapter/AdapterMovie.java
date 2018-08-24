@@ -2,6 +2,7 @@ package com.dicoding.kharisazhar.cataloguemovieuiux.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -38,15 +39,12 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.MyViewHolder
         return dataMovie;
     }
 
-    public void setDataMovie(ArrayList<Result> dataMovie) {
-        this.dataMovie = dataMovie;
-    }
-
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
        View v = LayoutInflater.from(c).inflate(R.layout.rv_movie, parent, false);
        MyViewHolder holder = new MyViewHolder(v);
+
        return holder;
     }
 
@@ -69,7 +67,11 @@ public class AdapterMovie extends RecyclerView.Adapter<AdapterMovie.MyViewHolder
                 c.startActivity(intent);
             }
         });
+
     }
+
+
+
 
     @Override
     public int getItemCount() {

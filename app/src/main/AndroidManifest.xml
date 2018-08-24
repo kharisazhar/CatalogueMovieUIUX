@@ -3,6 +3,7 @@
     package="com.dicoding.kharisazhar.cataloguemovieuiux">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <permission
         android:name="com.dicoding.kharisazhar.cataloguemovieuiux.READ_DATABASE"
         android:protectionLevel="normal" />
@@ -10,6 +11,7 @@
         android:name="com.dicoding.kharisazhar.cataloguemovieuiux.WRITE_DATABASE"
         android:protectionLevel="normal" />
 
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,16 +26,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailMovieActivity"
-            android:parentActivityName=".MainActivity"/>
+        <activity
+            android:name=".DetailMovieActivity"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".SearchResultActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
+
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
+        <activity android:name=".settings.SettingsActivity" />
 
         <provider
             android:name=".provider.MovieProvider"
@@ -41,6 +46,34 @@
             android:exported="true"
             android:readPermission="com.dicoding.kharisazhar.cataloguemovieuiux.READ_DATABASE"
             android:writePermission="com.dicoding.kharisazhar.cataloguemovieuiux.WRITE_DATABASE" />
+
+        <receiver android:name=".widget.StackWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/stack_widget_info" />
+        </receiver>
+
+        <service
+            android:name=".widget.StackWidgetService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <service
+            android:name=".services.SchedulerTask"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+
+        <receiver
+            android:name=".util.AlarmReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
     </application>
 
 </manifest>
