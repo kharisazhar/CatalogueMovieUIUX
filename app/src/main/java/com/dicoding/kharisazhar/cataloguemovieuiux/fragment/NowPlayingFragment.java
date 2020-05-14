@@ -84,6 +84,8 @@ public class NowPlayingFragment extends Fragment {
                 mData = (ArrayList<Result>) response.body().getResults();
                 progressBar.setVisibility(View.GONE);
 
+
+
                 AdapterMovie adapterMovie = new AdapterMovie(getContext(),mData);
                 rvMovie.setAdapter(adapterMovie);
                 rvMovie.setLayoutManager(new LinearLayoutManager(getContext()));
